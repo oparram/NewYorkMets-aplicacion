@@ -20,11 +20,6 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET }}
           AWS_REGION: us-east-1
-      - name: DockerImage to ECR
-        run: |
-          docker build -t ${{ env.IMAGE_NAME }} --no-cache=true .
-          docker tag ${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }} Cluster-Proyecto/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
-          docker push Cluster-Proyecto/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
       - name: Deploy on ECS
         run: |
           aws ecs update-service --cluster Cluster-Proyecto --service My-ecs-service --force-new-deployment
