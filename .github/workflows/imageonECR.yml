@@ -33,7 +33,7 @@ jobs:
        #aws ecr get-login-password --region us-east-1 | docker login 107106591751.dkr.ecr.us-east-1.amazonaws.com -u AWS --password-stdin
         run: |
            docker build -t ${{ env.IMAGE_NAME }} --no-cache=true .
-           docker tag ${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }} Cluster-Proyecto/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
+           docker tag ${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }} ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
            docker images
-           docker push Cluster-Proyecto/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
+           docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
   
