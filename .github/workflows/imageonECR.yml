@@ -29,9 +29,9 @@ jobs:
         uses: aws-actions/amazon-ecr-login@v2
         with:
           registry-type: public
+          #aws ecr get-login-password --region us-east-1 | docker login ${{ env.REGISTRY }} -u AWS --password-stdin
       - name: DockerImage to ECR
         run: |
-          aws ecr get-login-password --region us-east-1 | docker login ${{ env.REGISTRY }} -u AWS --password-stdin
           docker build -t ${{ env.IMAGE_NAME }} --no-cache=true .
           docker tag ${{ env.IMAGE_NAME }} ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
           docker images
