@@ -1,13 +1,11 @@
 name: push image on ECR
 on:
-  # pull_request:
-  #   types: [closed]
-  push:
+  pull_request:
+    types: [closed]
     branches:
-    - feature/img_index
+    - desarrollo
 env:
   REGISTRY: 107106591751.dkr.ecr.us-east-1.amazonaws.com
-  #REGISTRY: public.ecr.aws/w4v0m6b5/newyorkmets
   IMAGE_NAME: newyorkmetsprueba2
   IMAGE_TAG: 1.0.${{ github.run_number }}
 jobs:
@@ -15,7 +13,6 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       id-token: write
-
     steps:
       - name: Chechout this repo
         uses: actions/checkout@v4
@@ -31,7 +28,7 @@ jobs:
           registry-type: public
       - name: DockerImage to ECR
         run: |
-          aws ecr get-login-password --region us-east-1 | docker login 107106591751.dkr.ecr.us-east-1.amazonaws.com -u AWS --password-stdin
+          aws ecr get-login-password --region us-east-1 | docker login ${{ env.REGISTRY }} -u AWS --password-stdin
           docker build -t ${{ env.IMAGE_NAME }} --no-cache=true .
           docker tag ${{ env.IMAGE_NAME }} ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
           docker images
