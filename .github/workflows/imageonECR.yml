@@ -6,6 +6,7 @@ on:
     branches:
     - feature/img_index
 env:
+  REGISTRY: newyorkmets
   IMAGE_NAME: newyorkmets
   IMAGE_TAG: 1.0.${{ github.run_number }}
 jobs:
@@ -23,16 +24,16 @@ jobs:
           role-to-assume: arn:aws:iam::107106591751:role/github.to.aws.oicd
           aws-region: us-east-1
           audience: sts.amazonaws.com
-      # - name: Login to Amazon ECR Public
-      #   id: login-ecr-public
-      #   uses: aws-actions/amazon-ecr-login@v2
-      #   with:
-      #     registry-type: public
-      # - name: DockerImage to ECR
-      # #aws ecr get-login-password --region us-east-1 | docker login 107106591751.dkr.ecr.us-east-1.amazonaws.com -u AWS --password-stdin
-      #   run: |
-      #     docker build -t ${{ env.IMAGE_NAME }} --no-cache=true .
-      #     docker tag ${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }} Cluster-Proyecto/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
-      #     docker images
-      #     docker push Cluster-Proyecto/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
+      - name: Login to Amazon ECR Public
+        id: login-ecr-public
+        uses: aws-actions/amazon-ecr-login@v2
+        with:
+           registry-type: public
+      - name: DockerImage to ECR
+       #aws ecr get-login-password --region us-east-1 | docker login 107106591751.dkr.ecr.us-east-1.amazonaws.com -u AWS --password-stdin
+        run: |
+           docker build -t ${{ env.IMAGE_NAME }} --no-cache=true .
+           docker tag ${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }} Cluster-Proyecto/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
+           docker images
+           docker push Cluster-Proyecto/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
   
