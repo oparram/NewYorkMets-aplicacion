@@ -12,33 +12,9 @@ jobs:
       - name: checkout to this repo
         uses: actions/checkout@v4
       - name: Login to AWS 
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
+        env:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET }}
           aws-region: us-east-1
-      # - name: Deploy on ECS
-      #   run: |
-      #     aws ecs update-service --cluster Cluster-Proyecto --service My-ecs-service --force-new-deployment
-
-      # uses: a-sync/s3-uploader@master
-      # with:
-      #   args: --acl public-read
-      # env:
-      #   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-      #   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      #   AWS_REGION: 'us-east-1'
-      #   S3_BUCKET: newyork-bucket2
-      #   S3_KEY: ${{ secrets.S3_KEY }}
-      #   FILE: ./lambda.zip
-
-      # with:
-      #   folder: index.html
-      #   bucket: newyork-bucket2
-      #   bucket-region: us-east-1
-      #aws s3 sync index.html newyorkmets-bucket2
-
-      - name: Deploy on S3
         run: |
-          pwd && ls
-          aws s3 ls
+          aws s3 cp index.html s3://newyorkmets-bucket2/
