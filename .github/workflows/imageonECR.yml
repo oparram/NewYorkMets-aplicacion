@@ -39,5 +39,6 @@ jobs:
         # docker push ${{ env.REGISTRY }}/${{ env.REGISTRY_NAME}}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
         run:
           docker build -t ${{ env.IMAGE_NAME }} --no-cache=true .
+          docker images
 
   
