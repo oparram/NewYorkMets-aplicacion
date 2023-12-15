@@ -6,9 +6,9 @@ on:
     branches:
     - feature/img_index
 env:
-  REGISTRY: 107106591751.dkr.ecr.us-east-1.amazonaws.com/newyorkmetsprueba2
+  REGISTRY: 107106591751.dkr.ecr.us-east-1.amazonaws.com
   #REGISTRY: public.ecr.aws/w4v0m6b5/newyorkmets
-  IMAGE_NAME: newyorkmetsImage
+  IMAGE_NAME: newyorkmetsprueba2
   IMAGE_TAG: 1.0.${{ github.run_number }}
 jobs:
   image_on_registry:
