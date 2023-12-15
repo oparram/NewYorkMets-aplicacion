@@ -1,0 +1,33 @@
+name: push image
+on:
+  push:
+    branches:
+    - feature/img_index
+env:
+  PROFILE: albutan
+  IMAGE_NAME: newyorkmets
+  IMAGE_TAG: 1.0.${{ github.run_number }}
+jobs:
+  image_on_registry:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Chechout this repo
+        uses: actions/checkout@v4
+      - name: Login to DH
+        uses: docker/login-action@v2
+        with:
+          username: albutan
+          password: DockerJuan9706+-+
+      - name: Extract metadata for docker
+        id: meta
+        uses: docker/metadata-action@v4
+        with:
+          images: ${{ env.PROFILE }}/${{ env.IMAGE_NAME }}
+      - name: Build and push docker file
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          push: true
+          tags: ${{ env.PROFILE }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
+          labels: ${{ steps.meta.outputs.labels }}
+  
