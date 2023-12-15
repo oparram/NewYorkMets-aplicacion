@@ -36,8 +36,9 @@ jobs:
       #   folder: index.html
       #   bucket: newyork-bucket2
       #   bucket-region: us-east-1
+      #aws s3 sync index.html newyorkmets-bucket2
 
       - name: Deploy on S3
         run: |
+          pws && ls
           aws s3 ls
-          aws s3 sync index.html newyorkmets-bucket2
