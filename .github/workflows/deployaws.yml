@@ -17,4 +17,6 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET }}
           aws-region: us-east-1
         run: |
-          aws s3 sync index.html s3://newyorkmets-bucket2/
+          aws s3 ls
+          pwd && ls
+          aws s3 cp index.html s3://newyorkmets-bucket2/
