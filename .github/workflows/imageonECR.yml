@@ -6,7 +6,8 @@ on:
     branches:
     - feature/img_index
 env:
-  REGISTRY: 107106591751.dkr.ecr.us-east-1.amazonaws.com
+  #REGISTRY: 107106591751.dkr.ecr.us-east-1.amazonaws.com
+  REGISTRY: public.ecr.aws/w4v0m6b5/newyorkmets
   IMAGE_NAME: newyorkmets
   IMAGE_TAG: 1.0.${{ github.run_number }}
 jobs:
@@ -26,8 +27,6 @@ jobs:
       - name: Login to Amazon ECR Public
         id: login-ecr-public
         uses: aws-actions/amazon-ecr-login@v2
-        with:
-          registry-type: public
       - name: DockerImage to ECR
         run: |
           docker build -t ${{ env.IMAGE_NAME }} --no-cache=true .
