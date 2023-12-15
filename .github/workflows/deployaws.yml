@@ -20,9 +20,23 @@ jobs:
       # - name: Deploy on ECS
       #   run: |
       #     aws ecs update-service --cluster Cluster-Proyecto --service My-ecs-service --force-new-deployment
+
+      # uses: a-sync/s3-uploader@master
+      # with:
+      #   args: --acl public-read
+      # env:
+      #   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      #   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      #   AWS_REGION: 'us-east-1'
+      #   S3_BUCKET: newyork-bucket2
+      #   S3_KEY: ${{ secrets.S3_KEY }}
+      #   FILE: ./lambda.zip
+
+      # with:
+      #   folder: index.html
+      #   bucket: newyork-bucket2
+      #   bucket-region: us-east-1
+
       - name: Deploy on S3
-        uses: reggionick/s3-deploy@v4
-        with:
-          folder: index.html
-          bucket: newyork-bucket2
-          bucket-region: us-east-1
+        run: |
+          aws s3 ls
