@@ -1,8 +1,9 @@
-name: push image
+name: push image on registry
 on:
-  push:
+  pull_request:
+    types: [closed]
     branches:
-    - feature/img_index
+    - desarrollo
 env:
   PROFILE: albutan
   IMAGE_NAME: newyorkmets
