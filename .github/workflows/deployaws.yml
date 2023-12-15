@@ -5,10 +5,6 @@ on:
   push:
     branches:
     - feature/img_index
-env:
-  PROFILE: albutan
-  IMAGE_NAME: newyorkmets
-  IMAGE_TAG: 1.0.${{ github.run_number }}
 jobs:
   image_and_index:
     runs-on: ubuntu-latest
@@ -18,9 +14,9 @@ jobs:
       - name: Login to AWS 
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET }}
-          AWS_REGION: us-east-1
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET }}
+          aws-region: us-east-1
       # - name: Deploy on ECS
       #   run: |
       #     aws ecs update-service --cluster Cluster-Proyecto --service My-ecs-service --force-new-deployment
