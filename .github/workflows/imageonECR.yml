@@ -11,6 +11,9 @@ env:
 jobs:
   image_on_registry:
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+
     steps:
       - name: Chechout this repo
         uses: actions/checkout@v4
