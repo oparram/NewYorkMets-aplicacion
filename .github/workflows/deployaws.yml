@@ -40,5 +40,5 @@ jobs:
 
       - name: Deploy on S3
         run: |
-          pws && ls
+          pwd && ls
           aws s3 ls
