@@ -6,7 +6,7 @@ on:
     branches:
     - feature/img_index
 env:
-  REGISTRY: public.ecr.aws/w4v0m6b5/newyorkmets
+  REGISTRY: ${{ steps.login-ecr.outputs.registry }}
   REGISTRY_NAME: newyorkmets
   IMAGE_NAME: newyorkmets
   IMAGE_TAG: 1.0.${{ github.run_number }}
