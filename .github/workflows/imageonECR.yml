@@ -6,7 +6,8 @@ on:
     branches:
     - feature/img_index
 env:
-  REGISTRY: newyorkmets
+  REGISTRY: public.ecr.aws/w4v0m6b5/newyorkmets
+  REGISTRY_NAME: newyorkmets
   IMAGE_NAME: newyorkmets
   IMAGE_TAG: 1.0.${{ github.run_number }}
 jobs:
@@ -31,9 +32,13 @@ jobs:
            registry-type: public
       - name: DockerImage to ECR
        #aws ecr get-login-password --region us-east-1 | docker login 107106591751.dkr.ecr.us-east-1.amazonaws.com -u AWS --password-stdin
-        run: |
-           docker build -t ${{ env.IMAGE_NAME }} --no-cache=true .
-           docker tag ${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }} ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
-           docker images
-           docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
+        # run: |
+        #    docker build -t ${{ env.IMAGE_NAME }} --no-cache=true .
+        #    docker tag ${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }} ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
+        #    docker images
+        #    docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
+        run:
+          docker build -t ${{ env.REGISTRY }}/${{ env.REGISTRY_NAME}}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }} .
+          docker push ${{ env.REGISTRY }}/${{ env.REGISTRY_NAME}}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
+
   
