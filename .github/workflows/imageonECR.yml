@@ -1,4 +1,4 @@
-name: push image on registry
+name: push image on ECR
 on:
   pull_request:
     types: [closed]
