@@ -21,6 +21,8 @@ jobs:
       #   run: |
       #     aws ecs update-service --cluster Cluster-Proyecto --service My-ecs-service --force-new-deployment
       - name: Deploy on S3
-        run: |
-          ls && pwd
-          aws s3 cp index.html s3://newyork-bucket2 --recursive 
+        uses: reggionick/s3-deploy@v4
+        with:
+          folder: index.html
+          bucket: newyork-bucket2
+          bucket-region: us-east-1
