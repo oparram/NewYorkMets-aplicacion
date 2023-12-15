@@ -1,9 +1,10 @@
 name: push image on ECR
 on:
-  pull_request:
-    types: [closed]
+  # pull_request:
+  #   types: [closed]
+  push:
     branches:
-    - desarrollo
+    - feature/img_index
 env:
   PROFILE: albutan
   IMAGE_NAME: newyorkmets
@@ -14,15 +15,19 @@ jobs:
     steps:
       - name: Chechout this repo
         uses: actions/checkout@v4
-      - name: Login to AWS 
-        uses: aws-actions/configure-aws-credentials@v1
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
         with:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET }}
-          AWS_REGION: ${{ secrets.AWS_REGION }}
+          role-to-asume: arn:aws:iam::107106591751:role/github.to.aws.oicd
+          aws-region: ${{ secrets.AWS_REGION }}
+      - name: Login to Amazon ECR Public
+        id: login-ecr-public
+        uses: aws-actions/amazon-ecr-login@v2
+        with:
+          registry-type: public
       - name: DockerImage to ECR
+      #aws ecr get-login-password --region us-east-1 | docker login 107106591751.dkr.ecr.us-east-1.amazonaws.com -u AWS --password-stdin
         run: |
-          aws ecr get-login-password --region us-east-1 | docker login 107106591751.dkr.ecr.us-east-1.amazonaws.com -u AWS --password-stdin
           docker build -t ${{ env.IMAGE_NAME }} --no-cache=true .
           docker tag ${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }} Cluster-Proyecto/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
           docker images
