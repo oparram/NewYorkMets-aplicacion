@@ -17,6 +17,4 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET }}
           AWS_DEFAULT_REGION: us-east-1
         run: |
-          aws s3 ls
-          pwd && ls
           aws s3 cp index.html s3://newyorkmets-bucket2/
