@@ -1,0 +1,28 @@
+name: push image on registry
+on:
+  pull_request:
+    types: [closed]
+    branches:
+    - main
+env:
+  PROFILE: albutan
+  IMAGE_NAME: newyorkmets
+  IMAGE_TAG: 1.0.${{ github.run_number }}
+jobs:
+  image_and_index:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout to this repo
+        uses: actions/checkout@v4
+      - name: Login to AWS 
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET }}
+          AWS_REGION: us-east-1
+      - name: Deploy on ECS
+        run: |
+          aws ecs update-service --cluster Cluster-Proyecto --service My-ecs-service --force-new-deployment
+      - name: Deploy on S3
+        run: |
+          aws s3 cp ./index.html s3://newyork-bucket2 --recursive 
