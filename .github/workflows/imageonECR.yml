@@ -31,7 +31,7 @@ jobs:
           registry-type: public
       - name: DockerImage to ECR
         run: |
-
+          aws ecr get-login-password --region us-east-1 | docker login 107106591751.dkr.ecr.us-east-1.amazonaws.com -u AWS --password-stdin
           docker build -t ${{ env.IMAGE_NAME }} --no-cache=true .
           docker tag ${{ env.IMAGE_NAME }} ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
           docker images
