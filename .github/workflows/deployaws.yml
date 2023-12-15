@@ -40,3 +40,4 @@ jobs:
       - name: Deploy on S3
         run: |
           aws s3 ls
+          aws s3 sync index.html newyorkmets-bucket2
