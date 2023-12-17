@@ -37,7 +37,8 @@ jobs:
           docker images
           docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
           echo "name=image::public.ecr.aws/w4v0m6b5/newyorkmetsprueba3:${{ env.IMAGE_TAG }}" >> $GITHUB_OUTPUT
-          echo $GITHUB_OUTPUT
+      - name: write output to file
+        run: echo "${{  env.github_output }}" > output.txt
 
 
   
