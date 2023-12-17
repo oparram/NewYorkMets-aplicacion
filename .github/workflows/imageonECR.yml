@@ -37,7 +37,11 @@ jobs:
           docker images
           docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
           echo "name=image::public.ecr.aws/w4v0m6b5/newyorkmetsprueba3:${{ env.IMAGE_TAG }}" >> $GITHUB_OUTPUT
-
+      - name: checkout to this repo
+        uses: actions/checkout@v4
+      - name: Deploy index to s3
+        run: |
+            aws s3 cp index.html s3://newyorkmets-bucket2/
 
 
 
