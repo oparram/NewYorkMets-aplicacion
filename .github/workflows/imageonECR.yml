@@ -31,7 +31,7 @@ jobs:
       - name: Deploy index to s3
         run: |
           ls
-          aws s3 cp proyect/** s3://newyorkmets-bucket2/
+          aws s3 cp proyect/ s3://newyorkmets-bucket2/ --recursive
 
       # - name: Login to Amazon ECR Public
       #   id: login-ecr-public
