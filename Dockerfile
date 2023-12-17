@@ -1,3 +1,8 @@
 FROM ubuntu:latest
-COPY msg.txt /msg.txt
-CMD ["cat", "/msg.txt"]
+ENV DEBIAN_FRONTEND=noninteractive
+RUN apt-get update
+RUN apt-get install apache2 -y
+RUN apt-get install apache2-utils -y
+RUN apt-get clean
+EXPOSE 80
+CMD ["apache2ctl", "FOREGROUND"]
