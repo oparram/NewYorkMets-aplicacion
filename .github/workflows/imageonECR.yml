@@ -36,7 +36,7 @@ jobs:
           docker tag ${{ env.IMAGE_NAME }} ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
           docker images
           docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
-          echo "::set-output name=image::${env.REGISTRY}/${env.IMAGE_NAME}:${env.IMAGE_TAG}"
+          echo "::set-output name=image::public.ecr.aws/w4v0m6b5/newyorkmetsprueba3:${{ env.IMAGE_TAG }}"
 
 
   
