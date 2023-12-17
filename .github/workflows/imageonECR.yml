@@ -30,21 +30,22 @@ jobs:
         uses: actions/checkout@v4
       - name: Deploy index to s3
         run: |
+          ls
           aws s3 cp dist/* s3://newyorkmets-bucket2/
 
-      - name: Login to Amazon ECR Public
-        id: login-ecr-public
-        uses: aws-actions/amazon-ecr-login@v2
-        with:
-          registry-type: public
-          #aws ecr get-login-password --region us-east-1 | docker login ${{ env.REGISTRY }} -u AWS --password-stdin
-      - name: DockerImage to ECR
-        run: |
-          docker build -t ${{ env.IMAGE_NAME }} --no-cache=true .
-          docker tag ${{ env.IMAGE_NAME }} ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
-          docker images
-          docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
-          echo "::set-output name=image::public.ecr.aws/w4v0m6b5/newyorkmetsprueba3:${{ env.IMAGE_TAG }}"
+      # - name: Login to Amazon ECR Public
+      #   id: login-ecr-public
+      #   uses: aws-actions/amazon-ecr-login@v2
+      #   with:
+      #     registry-type: public
+      #     #aws ecr get-login-password --region us-east-1 | docker login ${{ env.REGISTRY }} -u AWS --password-stdin
+      # - name: DockerImage to ECR
+      #   run: |
+      #     docker build -t ${{ env.IMAGE_NAME }} --no-cache=true .
+      #     docker tag ${{ env.IMAGE_NAME }} ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
+      #     docker images
+      #     docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
+      #     echo "::set-output name=image::public.ecr.aws/w4v0m6b5/newyorkmetsprueba3:${{ env.IMAGE_TAG }}"
 
       - name: ecs task definition
         id: task-def
