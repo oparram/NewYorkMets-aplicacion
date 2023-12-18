@@ -1,2 +1,2 @@
 ¡Este es el mensaje que viene al ejecutar el Dockerfile!
-ahora este es el segundo mensaje que deberia salir en el 1.0.2
+ahora este es el segundo mensaje que deberia salir en las siguientes versiones
