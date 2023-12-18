@@ -22,7 +22,7 @@ jobs:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          role-to-assume: arn:aws:iam::${{ secrets.ARN_ROLE }}:role/github.to.aws.oicd
+          role-to-assume: arn:aws:iam::107106591751:role/github.to.aws.oicd
           aws-region: us-east-1
 
       - name: checkout to this repo
@@ -54,7 +54,7 @@ jobs:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          role-to-assume: arn:aws:iam::${{ secrets.ARN_ROLE }}:role/github.to.aws.oicd
+          role-to-assume: arn:aws:iam::107106591751:role/github.to.aws.oicd
           aws-region: us-east-1
   
       - name: Actualizar version ECS
