@@ -58,7 +58,7 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v4
         with:
           role-to-assume: arn:aws:iam::107106591751:role/github.to.aws.oicd
-          aws-region: us-east-1
+          aws-region: us-east-1 
       
       - name: Actualizar version ECS
         run: |
