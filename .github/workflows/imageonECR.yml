@@ -59,7 +59,7 @@ jobs:
         with:
           role-to-assume: arn:aws:iam::107106591751:role/github.to.aws.oicd
           aws-region: us-east-1
- 
+  
       - name: Actualizar version ECS
         run: |
           aws ecs update-service --cluster Cluster-Proyecto --service My-ecs-service --task-definition Task-NewYorkMets-1 --force-new-deployment
