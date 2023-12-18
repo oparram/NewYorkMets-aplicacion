@@ -1,10 +1,9 @@
 name: push image on ECR
 on:
-  # pull_request:
-  #   types: [closed]
-  push:
+  pull_request:
+    types: [closed]
     branches:
-    - 'feature/img_index'
+    - 'main'
 env:
   REGISTRY: ${{ secrets.REGISTRY }}
   IMAGE_NAME: ${{ secrets.IMAGE_NAME }}
