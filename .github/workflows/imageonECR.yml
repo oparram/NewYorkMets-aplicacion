@@ -1,7 +1,8 @@
 name: push image on ECR
 on:
-   pull_request:
-    types: [closed]
+  #  pull_request:
+  #   types: [closed]
+  push:  
     branches:
     - feature/img_index
 env:
